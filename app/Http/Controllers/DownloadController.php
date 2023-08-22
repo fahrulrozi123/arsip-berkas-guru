@@ -20,6 +20,8 @@ class DownloadController extends Controller
 {
     public function index()
     {
+        $userName = Auth::user()->name; // Ganti 'name' dengan atribut yang sesuai
+        $guru = DataGuru::where('nama', $userName)->first();
         $data = DB::table('data_gurus')->get();
         return view('download_berkas.index', compact('data'));
     }

@@ -56,7 +56,7 @@
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="login100-pic js-tilt" data-tilt>
-                        <p>Selamat datang di <b>Alia Islamic Schoool</b> Sekolah SD SMP SMA Terpadu</p>
+                        <p>Selamat datang <span class="text-success">{{ auth()->user()->name }}</span> di <b class="text-dark">Alia Islamic Schoool</b> Sekolah SD SMP SMA Terpadu</p>
                     </div>
                 </div>
             </div>

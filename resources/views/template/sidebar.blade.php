@@ -1,11 +1,12 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon">
-                    <img src="assets/dashboard-admin/img/logo.png" width="80%" alt="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center mb-5 mt-2" href="#">
+                <div class="sidebar-brand-icon mt-5">
+                    <img src="assets/dashboard-admin/img/logo.png" width="40%" alt="">
+                    <br>
+                    <div class="sidebar-brand-text mt-2">Alia Islamic Schoool</div>
                 </div>
-                <div class="sidebar-brand-text mx-3">Alia Islamic Schoool</div>
             </a>
 
             <!-- Divider -->

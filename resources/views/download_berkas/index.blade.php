@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<h3 class="m-2 font-weight-bold">Upload Berkas</h3>
+<h3 class="m-2 font-weight-bold">Daftar Berkas Guru</h3>
     @if(Session::has('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
@@ -108,7 +108,7 @@
                                     <a href="{{ route('lihat.berkas', basename($row->kk)) }}" target="_blank">
                                         {{ basename($row->kk) }}
                                     </a>
-                                </td>                                                       
+                                </td>                                                                                                              
                                 <td>
                                     <a href="{{ route('download', ['id' => $row->id]) }}" class="btn btn-primary"><i class="fa fa-download"></i> Download Semua Berkas</a>
                                 </td>
@@ -116,7 +116,6 @@
                         @endforeach 
                     </tbody>
                 </table>
-                
             </div>
         </div>
         
