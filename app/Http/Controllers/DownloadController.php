@@ -23,7 +23,7 @@ class DownloadController extends Controller
         $userName = Auth::user()->name; // Ganti 'name' dengan atribut yang sesuai
         $guru = DataGuru::where('nama', $userName)->first();
         $data = DB::table('data_gurus')->get();
-        return view('download_berkas.index', compact('data'));
+        return view('download_berkas.index', compact('data', 'userName'));
     }
 
     public function download($id)
@@ -45,6 +45,17 @@ class DownloadController extends Controller
         $zip->close();
 
         return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
+    }
+
+    public function lihatBerkasguru($username, $file)
+    {
+        $filePath = public_path("berkas_guru/$username/$file");
+
+        if (File::exists($filePath)) {
+            return response()->file($filePath);
+        }
+
+        abort(404);
     }
 
 }

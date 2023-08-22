@@ -3,14 +3,14 @@
 @section('download')
     <li class="nav-item active">
         <a class="nav-link" href="/download-berkas">
-            <i class="fa fa-download"></i>
+            <i class="fas fa-fw fa-chart-area"></i>
             <span>download Berkas Guru</span>
         </a>
     </li>
 @endsection
 
 @section('content')
-<h3 class="m-2 font-weight-bold">Daftar Berkas Guru</h3>
+<h3 class="m-2 font-weight-bold">Upload Berkas</h3>
     @if(Session::has('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
@@ -56,66 +56,32 @@
                     </tfoot>
                     <tbody>
                         @foreach ($data as $row)
-                            <tr>
-                                <td>{{ $row->nama }}</td>
-                                <td>{{ $row->nuptk }}</td>                          
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->ktp)) }}" target="_blank">
-                                        {{ basename($row->ktp) }}
-                                    </a>
-                                </td>                            
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->ijazah_SD)) }}" target="_blank">
-                                        {{ basename($row->ijazah_SD) }}
-                                    </a>
-                                </td>                            
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->ijazah_SMP)) }}" target="_blank">
-                                        {{ basename($row->ijazah_SMP) }}
-                                    </a>
-                                </td>                            
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->ijazah_SMA)) }}" target="_blank">
-                                        {{ basename($row->ijazah_SMA) }}
-                                    </a>
-                                </td>                            
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->ijazah_S1)) }}" target="_blank">
-                                        {{ basename($row->ijazah_S1) }}
-                                    </a>
-                                </td>                                                       
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->ijazah_S2)) }}" target="_blank">
-                                        {{ basename($row->ijazah_S2) }}
-                                    </a>
-                                </td>                                                       
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->sk_yayasan)) }}" target="_blank">
-                                        {{ basename($row->sk_yayasan) }}
-                                    </a>
-                                </td>                                                       
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->sk_kepsek)) }}" target="_blank">
-                                        {{ basename($row->sk_kepsek) }}
-                                    </a>
-                                </td>                                                       
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->akte)) }}" target="_blank">
-                                        {{ basename($row->akte) }}
-                                    </a>
-                                </td>                                                       
-                                <td>
-                                    <a href="{{ route('lihat.berkas', basename($row->kk)) }}" target="_blank">
-                                        {{ basename($row->kk) }}
-                                    </a>
-                                </td>                                                                                                              
-                                <td>
-                                    <a href="{{ route('download', ['id' => $row->id]) }}" class="btn btn-primary"><i class="fa fa-download"></i> Download Semua Berkas</a>
-                                </td>
-                            </tr>
-                        @endforeach 
+                        <tr>
+                            <td>{{ $row->nama }}</td>
+                            <td>{{ $row->nuptk }}</td>
+                            @foreach(['ktp', 'ijazah_SD', 'ijazah_SMP', 'ijazah_SMA', 'ijazah_S1', 'ijazah_S2', 'sk_yayasan', 'sk_kepsek', 'akte', 'kk'] as $field)
+                                @if ($row->$field)
+                                    <td>
+                                        <a href="{{ route('lihat.berkasguru', ['username' => $row->nama, 'file' => basename($row->$field)]) }}" target="_blank">
+                                            {{ basename($row->$field) }}
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>-</td>
+                                @endif
+                            @endforeach
+                            <td>
+                                <a href="{{ route('download', ['id' => $row->id]) }}" class="btn btn-primary">
+                                    <i class="fa fa-download"></i> Download Semua Berkas
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    
+                    
                     </tbody>
                 </table>
+                
             </div>
         </div>
         

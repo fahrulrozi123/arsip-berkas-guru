@@ -43,8 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('akun/edit/{id}', [LoginController::class, 'edit'])->name('akun.edit');
     Route::post('akun/update/{id}', [LoginController::class, 'update'])->name('akun.update');
     Route::get('akun/destroy/{id}', [LoginController::class, 'destroy'])->name('destroy');
-    
+
+    Route::get('berkas/{username}/{file}', [DownloadController::class, 'lihatBerkasguru'])->name('lihat.berkasguru');
     Route::get('berkas/{file}', [DataGuruController::class, 'lihatBerkas'])->name('lihat.berkas');
+
     Route::get('upload-berkas', [DataGuruController::class, 'index'])->name('berkas');
     Route::get('upload/create', [DataGuruController::class, 'create'])->name('upload.create');
     Route::post('upload/store', [DataGuruController::class, 'store'])->name('upload.store');
