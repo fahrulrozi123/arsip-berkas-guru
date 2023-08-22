@@ -3,7 +3,7 @@
 @section('download')
     <li class="nav-item active">
         <a class="nav-link" href="/download-berkas">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fa fa-download"></i>
             <span>download Berkas Guru</span>
         </a>
     </li>

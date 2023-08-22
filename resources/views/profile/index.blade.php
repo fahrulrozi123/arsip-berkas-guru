@@ -3,7 +3,7 @@
 @section('profile')
     <li class="nav-item active">
         <a class="nav-link" href="/profile">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             <span>Profile</span>
         </a>
     </li>

@@ -38,7 +38,7 @@
             @if($user->level == 'admin')
                 <li class="nav-item">
                     <a class="nav-link" href="/akun">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         <span>Kelola Akun Guru</span>
                     </a>
                 </li>
@@ -48,7 +48,7 @@
             @if($user->level == 'admin')
                 <li class="nav-item">
                     <a class="nav-link" href="/download-berkas">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fa fa-download"></i>
                         <span>download Berkas Guru</span>
                     </a>
                 </li>
@@ -58,7 +58,7 @@
             @if($user->level == 'guru')
                 <li class="nav-item">
                     <a class="nav-link" href="/upload-berkas">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fa fa-download"></i>
                         <span>Upload Berkas</span>
                     </a>
                 </li>
@@ -68,7 +68,7 @@
             @if($user->level == 'guru')
                 <li class="nav-item mb-5">
                     <a class="nav-link" href="/profile">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         <span>Profile</span>
                     </a>
                 </li>
@@ -78,14 +78,14 @@
             @if($user->level == 'admin')
                 <li class="nav-item mt-5">
                     <a class="nav-link" href="/logout">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         <span>Log Out</span>
                     </a>
                 </li>
             @elseif($user->level == 'guru')
                 <li class="nav-item mt-5">
                     <a class="nav-link" href="/logoutguru">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         <span>Log Out</span>
                     </a>
                 </li>

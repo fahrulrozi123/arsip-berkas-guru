@@ -3,7 +3,7 @@
 @section('upload')
 <li class="nav-item active">
     <a class="nav-link" href="/upload-berkas">
-        <i class="fas fa-fw fa-chart-area"></i>
+        <i class="fa fa-download"></i>
         <span>Upload Berkas</span>
     </a>
 </li>
