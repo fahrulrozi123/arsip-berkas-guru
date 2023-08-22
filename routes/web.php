@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LHPController;
-use App\Http\Controllers\CetakLHPController;
-use App\Http\Controllers\Verifikasi_LHPSController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DataGuruController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -19,29 +19,23 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-}) ;
+// Route::get('/', function () {
+//     return view('login');
+// }) ;
 
-Route::get('/login', [LoginController::class, 'index'])->name('index');
+Route::get('/', [LoginController::class, 'index'])->name('index');
+Route::get('/login-guru', [LoginController::class, 'guru'])->name('guru');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logoutguru', [LoginController::class, 'logoutguru'])->name('logoutguru');
 Route::post('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
-Route::post('/tambahuser', [LoginController::class, 'tambahuser'])->name('tambahuser');
-Route::get('/regist', [LoginController::class, 'register'])->name('regist');
+Route::post('/loginguru', [LoginController::class, 'loginguru'])->name('loginguru');
 
-Route::get('/cetakLHP/{id}', [CetakLHPController::class, 'CetakLHP'])->name('cetakLHP');
+Route::get('register/admin', [LoginController::class, 'regist'])->name('regist');
+Route::post('register/storeadmin', [LoginController::class, 'storeadmin'])->name('store.admin');
 
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
-
-    
-    Route::get('verif-lhps', [Verifikasi_LHPSController::class, 'verif'])->name('verif');
-    Route::put('/verifikasi/{id}', [Verifikasi_LHPSController::class, 'update'])->name('verifikasi.update');
-    Route::put('/batalverifikasi/{id}', [Verifikasi_LHPSController::class, 'batal'])->name('verifikasi.batal');
-    
-    Route::get('download-file/{filename}', [LHPController::class, 'downloadFile'])->name('download.file');
-    Route::get('cetak-LHP', [CetakLHPController::class, 'index'])->name('index');
     
     Route::get('akun', [LoginController::class, 'akun'])->name('akun');
     Route::get('akun/create', [LoginController::class, 'create'])->name('akun.create');
@@ -49,14 +43,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('akun/edit/{id}', [LoginController::class, 'edit'])->name('akun.edit');
     Route::post('akun/update/{id}', [LoginController::class, 'update'])->name('akun.update');
     Route::get('akun/destroy/{id}', [LoginController::class, 'destroy'])->name('destroy');
+    
+    Route::get('berkas/{file}', [DataGuruController::class, 'lihatBerkas'])->name('lihat.berkas');
+    Route::get('upload-berkas', [DataGuruController::class, 'index'])->name('berkas');
+    Route::get('upload/create', [DataGuruController::class, 'create'])->name('upload.create');
+    Route::post('upload/store', [DataGuruController::class, 'store'])->name('upload.store');
+    Route::get('upload/edit/{id}', [DataGuruController::class, 'edit'])->name('upload.edit');
+    Route::post('upload/update/{id}', [DataGuruController::class, 'update'])->name('upload.update');
+    Route::get('upload/destroy/{id}', [DataGuruController::class, 'destroy'])->name('destroy');
 
-    Route::get('datalhp', [LHPController::class, 'index'])->name('datalhp');
-    Route::get('LHP_FIX', [LHPController::class, 'lhp'])->name('lhp');
-    Route::get('datalhp/create', [LHPController::class, 'create'])->name('lhp.create');
-    Route::post('datalhp/store', [LHPController::class, 'store'])->name('lhp.store');
-    Route::get('lhp/edit/{id}', [LHPController::class, 'edit'])->name('lhp.edit');
-    Route::post('lhp/update/{id}', [LHPController::class, 'update'])->name('lhp.update');
-    Route::get('lhp/destroy/{id}', [LHPController::class, 'destroy'])->name('destroy');
+    Route::get('download-berkas', [DownloadController::class, 'index'])->name('index');
+    Route::get('download/{id}', [DownloadController::class, 'download'])->name('download');
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('index');
+
 });
 
 require __DIR__.'/auth.php';

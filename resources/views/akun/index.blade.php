@@ -4,13 +4,13 @@
 <li class="nav-item active">
     <a class="nav-link" href="akun">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Data akun</span>
+        <span>Kelola Akun Guru</span>
     </a>
 </li>
 @endsection
 
 @section('content')
-<h3 class="m-2 font-weight-bold">Daftar akun</h3>
+<h3 class="m-2 font-weight-bold">Daftar Akun Guru</h3>
     @if(Session::has('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
@@ -27,37 +27,43 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>name</th>
-                            <th>email</th>
-                            <th>notel</th>
-                            <th>level</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Nomor Telepon</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Level</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>name</th>
-                            <th>email</th>
-                            <th>notel</th>
-                            <th>level</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Nomor Telepon</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Level</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($akun as $row)
+                        @if ($row->level === 'guru')
                         <tr>
                             <td>{{ $row->name }}</td>
                             <td>{{ $row->email }}</td>
                             <td>{{ $row->notel }}</td>
                             <td>
+                                @if ($row->kelamin === 'pria')
+                                    <span class="badge badge-primary">Pria</span>
+                                @elseif ($row->kelamin === 'wanita')
+                                    <span class="badge badge-secondary">Wanita</span>
+                                @endif
+                            </td>
+                            <td>
                                 @if ($row->level === 'admin')
                                     <span class="badge badge-success">Admin</span>
-                                @elseif ($row->level === 'audithor')
-                                    <span class="badge badge-warning">Auditor</span>
-                                @elseif ($row->level === 'spi')
-                                    <span class="badge badge-primary">Kepala SPI</span>
-                                @elseif ($row->level === 'direc')
-                                    <span class="badge badge-danger">Directur Utama</span>
+                                @elseif ($row->level === 'guru')
+                                    <span class="badge badge-warning">Guru</span>
                                 @endif
                             </td>
                             <td>
@@ -69,6 +75,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endif
                         @endforeach 
                     </tbody>
                 </table>

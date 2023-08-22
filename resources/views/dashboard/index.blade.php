@@ -47,7 +47,7 @@
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="login100-pic js-tilt" data-tilt>
-                        <img src="assets/dashboard-admin/img/logo.jpeg" alt="IMG">
+                        <img src="assets/dashboard-admin/img/logo.png" alt="IMG">
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="login100-pic js-tilt" data-tilt>
-                        <p>Selamat datang di sistem Laporan hasil pemeriksaan audit internal pada PT. Perusahaan Perdagangan Indonesia</p>
+                        <p>Selamat datang di <b>Alia Islamic Schoool</b> Sekolah SD SMP SMA Terpadu</p>
                     </div>
                 </div>
             </div>

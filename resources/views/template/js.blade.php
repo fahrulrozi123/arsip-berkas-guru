@@ -84,3 +84,32 @@
             });
       });
 </script>
+
+<script>
+      $('.hapusberkas').click(function(){
+            var data_id = $(this).attr('data-id');
+            var nama = $(this).attr('data-nama');
+            swal({
+            title: "Apa kamu yakin?",
+            text: "kamu akan menghapus Berkas dengan name guru "+nama+" ",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                  window.location = "/upload/destroy/"+data_id+""
+                  swal("Berkas Guru dengan nama "+nama+" berhasil di hapus", {
+                  icon: "success",
+                  });
+            } else {
+                  // swal("property "+name+" gagal di hapus");
+                  swal(
+                        'Oooops!!!',
+                        'Berkas guru '+nama+' gagal di hapus :)',
+                        'error'
+                  )
+            }
+            });
+      });
+</script>

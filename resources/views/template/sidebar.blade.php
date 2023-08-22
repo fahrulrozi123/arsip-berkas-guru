@@ -1,11 +1,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <div class="sidebar-brand-icon">
+                    <img src="assets/dashboard-admin/img/logo.png" width="80%" alt="">
                 </div>
-                <div class="sidebar-brand-text mx-3">Audit internal</div>
+                <div class="sidebar-brand-text mx-3">Alia Islamic Schoool</div>
             </a>
 
             <!-- Divider -->
@@ -38,58 +38,57 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/akun">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Data User</span>
+                        <span>Kelola Akun Guru</span>
                     </a>
                 </li>
             @endif
             @show
-            @section('lhp')
-            @if($user->level == 'admin' || $user->level == 'audithor')
+            @section('download')
+            @if($user->level == 'admin')
                 <li class="nav-item">
-                    <a class="nav-link" href="/datalhp">
+                    <a class="nav-link" href="/download-berkas">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>LHPS</span>
+                        <span>download Berkas Guru</span>
                     </a>
                 </li>
             @endif
             @show
-            @section('lhpfix')
-            @if($user->level == 'admin' || $user->level == 'direc')
+            @section('upload')
+            @if($user->level == 'guru')
                 <li class="nav-item">
-                    <a class="nav-link" href="/LHP_FIX">
+                    <a class="nav-link" href="/upload-berkas">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>LHP</span>
+                        <span>Upload Berkas</span>
                     </a>
                 </li>
             @endif
             @show
-            @section('verif')
-            @if($user->level == 'admin' || $user->level == 'spi')
-                <li class="nav-item">
-                    <a class="nav-link" href="/verif-lhps">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Verifikasi LHPS</span>
-                    </a>
-                </li>
-            @endif
-            @show
-            @section('cetak')
-            @if($user->level == 'admin' || $user->level == 'direc')
+            @section('profile')
+            @if($user->level == 'guru')
                 <li class="nav-item mb-5">
-                    <a class="nav-link" href="/cetak-LHP">
+                    <a class="nav-link" href="/profile">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Cettak LHP</span>
+                        <span>Profile</span>
                     </a>
                 </li>
             @endif
             @show
 
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Log Out</span>
-                </a>
-            </li>
+            @if($user->level == 'admin')
+                <li class="nav-item mt-5">
+                    <a class="nav-link" href="/logout">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Log Out</span>
+                    </a>
+                </li>
+            @elseif($user->level == 'guru')
+                <li class="nav-item mt-5">
+                    <a class="nav-link" href="/logoutguru">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Log Out</span>
+                    </a>
+                </li>
+            @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

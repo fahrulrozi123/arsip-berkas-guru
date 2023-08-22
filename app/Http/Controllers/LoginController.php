@@ -16,8 +16,14 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller{
 
-    public function index(){
+    public function index()
+    {
         return view('login');
+    }
+
+    public function guru()
+    {
+        return view('login-guru');
     }
 
     public function akun()
@@ -30,11 +36,21 @@ class LoginController extends Controller{
     {
         return view('akun.create');
     }
+
+    public function regist()
+    {
+        return view('regist');
+    }
     
-    public function store(Request $request)
+    public function storeadmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'kelamin' => 'required',
+            'pdd_terakhir' => 'required',
+            'tgk_lahir' => 'required',
+            'nuptk' => 'required',
+            'alamat' => 'required',
             'email' => [
                 'required',
                 Rule::unique('users', 'email')
@@ -58,6 +74,60 @@ class LoginController extends Controller{
 
         $data = User::create([
             'name' => $request->name,
+            'kelamin' => $request->kelamin,
+            'pdd_terakhir' => $request->pdd_terakhir,
+            'tgk_lahir' => $request->tgk_lahir,
+            'nuptk' => $request->nuptk,
+            'alamat' => $request->alamat,
+            'email' => $request->email,
+            'notel' => $request->notel,
+            'level' => $request->level,
+            'password' => Hash::make($request->password),
+            'remember_token' => Str::random(60)
+        ]);
+
+        Session::flash('success', 'Data Admin berhasil ditambahkan. Silahkan Login');
+
+        return view('login'); // Pastikan route 'log' sesuai dengan yang ada di routes/web.php
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'kelamin' => 'required',
+            'pdd_terakhir' => 'required',
+            'tgk_lahir' => 'required',
+            'nuptk' => 'required',
+            'alamat' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('users', 'email')
+            ],
+            'notel' => [
+                'required',
+                Rule::unique('users', 'notel')
+            ],
+            'password' => 'required',
+            'level' => 'required',
+        ], [
+            'email.unique' => 'Email sudah digunakan.',
+            'notel.unique' => 'Nomor telepon sudah digunakan.'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = User::create([
+            'name' => $request->name,
+            'kelamin' => $request->kelamin,
+            'pdd_terakhir' => $request->pdd_terakhir,
+            'tgk_lahir' => $request->tgk_lahir,
+            'nuptk' => $request->nuptk,
+            'alamat' => $request->alamat,
             'email' => $request->email,
             'notel' => $request->notel,
             'level' => $request->level,
@@ -84,6 +154,11 @@ class LoginController extends Controller{
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'kelamin' => 'required',
+            'pdd_terakhir' => 'required',
+            'tgk_lahir' => 'required',
+            'nuptk' => 'required',
+            'alamat' => 'required',
             'email' => [
                 'required',
                 Rule::unique('users', 'email')->ignore($id)
@@ -107,6 +182,11 @@ class LoginController extends Controller{
 
         // Update data user
         $user->name = $request->name;
+        $user->kelamin = $request->kelamin;
+        $user->pdd_terakhir = $request->pdd_terakhir;
+        $user->tgk_lahir = $request->tgk_lahir;
+        $user->nuptk = $request->nuptk;
+        $user->alamat = $request->alamat;
         $user->email = $request->email;
         $user->notel = $request->notel;
         $user->level = $request->level;
@@ -151,9 +231,45 @@ class LoginController extends Controller{
         return redirect('/');
     }
 
+    public function loginguru(Request $request)
+    {
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user(); // Mendapatkan data user yang sedang login
+    
+            $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
+    
+            foreach ($tables as $table) {
+                $columns = DB::getSchemaBuilder()->getColumnListing($table);
+                
+                // Cek apakah tabel memiliki kolom 'link'
+                if (in_array('link', $columns)) {
+                    $links = DB::table($table)->where('user_id', $user->id)->pluck('link');
+    
+                    // Memeriksa apakah ada link dalam tabel yang perlu dicek
+                    if ($links->isNotEmpty()) {
+                        foreach ($links as $link) {
+                            // Mengarahkan pengguna ke link jika sudah login
+                            return Redirect::away($link);
+                        }
+                    }
+                }
+            }
+            Session::flash('success', 'Anda berhasil login sebagai ');
+            return redirect('/home');
+        }
+    
+        Session::flash('error', 'Email atau password salah.');
+        return redirect('/');
+    }
+
     public function logout(){
         Auth::logout();
         return redirect('/');
+    }
+    
+    public function logoutguru(){
+        Auth::logout();
+        return redirect('/login-guru');
     }
     
     public function destroy($id){
